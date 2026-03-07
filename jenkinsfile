@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_REPO = 'veeradockerhub/bikerentalmultistage'
-        IMAGE_TAG = 'latest'
+        DOCKER_HUB_REPO = 'img1'
+       
         CONTAINER_NAME = 'cont1'
     }
 
@@ -18,7 +18,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 dir('frontend/bikes-rental-system') {
-                    sh "docker build -t $DOCKER_HUB_REPO:$IMAGE_TAG ."
+                    sh "docker build -t $DOCKER_HUB_REPO ."
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
                 sh '''
                 docker stop $CONTAINER_NAME || true
                 docker rm $CONTAINER_NAME || true
-                docker run -d -p 91:80 --name $CONTAINER_NAME $DOCKER_HUB_REPO:$IMAGE_TAG
+                docker run -d -p 91:80 --name $CONTAINER_NAME $DOCKER_HUB_REPO
                 '''
             }
         }
