@@ -11,7 +11,8 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/lakshmansrikanth123/veera.git']])
+               git branch: 'main',
+                url: 'https://github.com/varsha-0411/veera.git'
             }
         }
 
