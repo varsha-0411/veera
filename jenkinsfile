@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_REPO = 'img1'
+        DOCKER_HUB_REPO = 'varsha0411/img1'
        
         CONTAINER_NAME = 'cont1'
     }
@@ -23,8 +23,11 @@ pipeline {
                 }
             }
         }
-
-
+        stage('Push to Docker Hub') {
+            steps {
+                sh "docker push $DOCKER_HUB_REPO"
+            }
+        }
 
         stage('Deploy Container') {
             steps {
